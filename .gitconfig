@@ -1,0 +1,64 @@
+[user]
+	name = Fred Collman
+	email = fredcollman@gmail.com
+[core]
+	editor = vim
+	autocrlf = true
+	excludesfile = ~/.gitignore
+[alias]
+	### info & shortcuts
+	aliases = !git config -l | grep alias | cut -c 7-
+	alias = "!f() { git config --global \"alias.$1\" \"$2\"; }; f"
+	explain = help
+	
+	### branch mgmt
+	current = rev-parse --abbrev-ref HEAD
+	delete = branch -d
+	unbranch = branch -d
+	branches = "!f() { git branch $@ | awk -F ' +' '! /\\(no branch\\)/ {print $2}'; }; f"
+	
+	### (un)committing
+    amend = commit --amend --no-edit
+	unstage = reset HEAD --
+	uncommit = reset --soft HEAD^
+	wip = !git add -A && git commit -m 'WIP'
+	unwip = reset --soft HEAD^
+	stashup = "!oldb=`git current`; newb=\"$oldb-stash\"; git checkout -b $newb && git add -A && git commit -qm \"unwanted commit\" && git checkout $oldb"
+	abandon = reset --hard @{upstream}
+	pushall = push origin :
+
+	### logging
+	nicelog = "!nice-log.sh"
+	graph = "!nice-log.sh --graph --topo-order"
+	find = "!f() { term=$1 && shift && git nicelog --all --grep="$term" -i "$@"; }; f"
+	id = "!f() { git log -n 1 "$@"; }; f"
+	timeline = "!f() { git nicelog --first-parent $@; }; f"
+	# ITS_BOARD = "!f() { ticket=$1 && shift && git find "ITS_BOARD-$ticket" "$@"; }; f"
+	compete = shortlog -s -n
+
+	### git flow
+	dev = checkout develop
+	master = checkout master
+	sf = flow feature start
+	fd = flow feature finish
+	hf = flow hotfix start
+	hd = flow hotfix finish
+	hotfix = "!f() { git flow hotfix start "$@" || git flow hotfix finish "$@"; }; f"
+
+	### typos & abbreviations
+	stauts = status
+	st = status
+	co = checkout
+	aa = add --all
+	ci = commit
+	ff = pull --ff-only
+	noff = merge --no-ff
+	l = !git nicelog
+	g = !git graph
+	ga = !git graph --all
+[merge]
+	tool = p4merge
+[push]
+	default = simple
+[url "https://github"]
+	insteadOf = git://github
