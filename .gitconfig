@@ -14,7 +14,9 @@
 	### branch mgmt
 	current = rev-parse --abbrev-ref HEAD
 	delete = branch -d
+    fdelete = branch -D
 	unbranch = branch -d
+    funbranch = branch -D
 	branches = "!f() { git branch $@ | awk -F ' +' '! /\\(no branch\\)/ {print $2}'; }; f"
 	
 	### (un)committing
@@ -26,6 +28,11 @@
 	stashup = "!oldb=`git current`; newb=\"$oldb-stash\"; git checkout -b $newb && git add -A && git commit -qm \"unwanted commit\" && git checkout $oldb"
 	abandon = reset --hard @{upstream}
 	pushall = push origin :
+    imerge = "!f() { git merge "$@"; git mergetool --no-prompt; }; f"
+    idiff = difftool --dir-diff
+    staged = diff --staged
+    istaged = difftool --dir-diff --staged
+    pending = difftool --dir-diff --staged
 
 	### logging
 	nicelog = "!nice-log.sh"
@@ -56,8 +63,21 @@
 	l = !git nicelog
 	g = !git graph
 	ga = !git graph --all
+    dt = difftool --dir-diff
+[difftool "kdiff3"]
+    path = "/c/Program Files/KDiff3/kdiff3.exe"
+    trustExitCode = false
+[difftool]
+    prompt = false
+[diff]
+    tool = kdiff3
+[mergetool "kdiff3"]
+    path = "/c/Program Files/KDiff3/kdiff3.exe"
+    trustExitCode = true
+[mergetool]
+    keepBackup = false
 [merge]
-	tool = p4merge
+    tool = kdiff3
 [push]
 	default = simple
 [url "https://github"]
