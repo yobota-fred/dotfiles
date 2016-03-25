@@ -29,10 +29,15 @@
 	abandon = reset --hard @{upstream}
 	pushall = push origin :
     imerge = "!f() { git merge "$@"; git mergetool --no-prompt; }; f"
+
+    ### diffing
+    di = "!f() { default-diff.sh "$@" | ignore-imports.sh | maybe-page.sh; }; f"
     idiff = difftool --dir-diff
-    staged = diff --staged
+    staged = "!f() { git di --staged "$@"; }; f"
     istaged = difftool --dir-diff --staged
     pending = difftool --dir-diff --staged
+    last = "!f() { git di HEAD^ "$@"; }; f"
+    review = difftool --dir-diff origin/develop..develop
 
 	### logging
 	nicelog = "!nice-log.sh"
@@ -49,8 +54,8 @@
 	sf = flow feature start
 	fd = flow feature finish
 	hf = flow hotfix start
-	hd = flow hotfix finish
-	hotfix = "!f() { git flow hotfix start "$@" || git flow hotfix finish "$@"; }; f"
+	hd = !hotfix-done.sh
+	hotfix = "!f() { git hf "$@" || git hd "$@"; }; f"
 
 	### typos & abbreviations
 	stauts = status
@@ -82,3 +87,5 @@
 	default = simple
 [url "https://github"]
 	insteadOf = git://github
+[url "git@gitlab.com:fredcollman/"]
+	insteadOf = fred:
