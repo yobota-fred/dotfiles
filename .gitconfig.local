@@ -1,0 +1,28 @@
+[user]
+	name = Fred Collman
+	email = fredcollman@gmail.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[alias]
+	# ITS_BOARD = "!f() { ticket=$1 && shift && git find "ITS_BOARD-$ticket" "$@"; }; f"
+[difftool "kdiff3"]
+    path = "${PROGRAMFILES}/KDiff3/kdiff3.exe"
+    trustExitCode = false
+[difftool]
+    prompt = false
+[diff]
+    tool = kdiff3
+[mergetool "kdiff3"]
+    path = "${PROGRAMFILES}/KDiff3/kdiff3.exe"
+    trustExitCode = true
+[mergetool]
+    keepBackup = false
+[merge]
+    tool = kdiff3
+[push]
+	default = simple
+[url "https://github"]
+	insteadOf = git://github
+[url "git@gitlab.com:fredcollman/"]
+	insteadOf = fred:
