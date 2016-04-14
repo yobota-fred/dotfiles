@@ -13,10 +13,11 @@ function run_unit_tests() {
 
 	if [ $# -gt 0 ]; then # we have args
 	    filename=$1
+
 	    # Remove trailing line numbers from filename, e.g. spec/my_spec.rb:33
 	    grep_filename=`echo $1 | sed 's/:.*$//g'`
 
-	    (set +e; grep -r 'spec_helper' $grep_filename) > /dev/null
+	    (set +e; grep -r 'rails_helper' $grep_filename) > /dev/null
 	    if [ $? -eq 1 ]; then # no match; we have a stand-alone spec
 	        need_rails=''
 	    fi
@@ -30,6 +31,9 @@ function run_unit_tests() {
 	    command="ruby -S bundle exec $command"
 	fi
 
+	if [ -n "$RC_DEBUG" ]; then
+		echo "Running $command $filename"
+	fi
 	RAILS_ENV=test $command $filename
 }
 
