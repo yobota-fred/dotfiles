@@ -89,5 +89,7 @@
 	insteadOf = git://github
 [url "git@gitlab.com:fredcollman/"]
 	insteadOf = fred:
+[url "git@github.com:fredcollman/"]
+	insteadOf = hub:
 [include]
 	path = ~/.gitconfig.local
