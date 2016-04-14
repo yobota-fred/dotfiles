@@ -1,28 +1,10 @@
 [user]
-	name = Fred Collman
-	email = fredcollman@gmail.com
+	# email = fredcollman@gmail.com
 [core]
-	editor = vim
-	excludesfile = ~/.gitignore
+	editor = vim # '/path/to/Sublime Text 3/subl.exe' -w
 [alias]
 	# ITS_BOARD = "!f() { ticket=$1 && shift && git find "ITS_BOARD-$ticket" "$@"; }; f"
 [difftool "kdiff3"]
-    path = "${PROGRAMFILES}/KDiff3/kdiff3.exe"
-    trustExitCode = false
-[difftool]
-    prompt = false
-[diff]
-    tool = kdiff3
+    path = "/c/Program Files/KDiff3/kdiff3.exe"
 [mergetool "kdiff3"]
-    path = "${PROGRAMFILES}/KDiff3/kdiff3.exe"
-    trustExitCode = true
-[mergetool]
-    keepBackup = false
-[merge]
-    tool = kdiff3
-[push]
-	default = simple
-[url "https://github"]
-	insteadOf = git://github
-[url "git@gitlab.com:fredcollman/"]
-	insteadOf = fred:
+    path = "/c/Program Files/KDiff3/kdiff3.exe"
