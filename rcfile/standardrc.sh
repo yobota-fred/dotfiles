@@ -2,7 +2,7 @@
 
 . /etc/profile
 
-PROJECTS=/e/dev
+PROJECTS=$GIT_BASEDIR
 # PROJECT_TYPE=
 # PROJECT_NAME=
 
