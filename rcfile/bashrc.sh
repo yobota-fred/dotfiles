@@ -6,7 +6,15 @@ fi
 trimmed_dir() {
 	echo $PWD | sed "s:^${GIT_BASEDIR}:£:" | sed "s:^${HOME}:~:"
 }
-export PS1='\[\033]0;`trimmed_dir`\007\]\[\033[33m\]`trimmed_dir`\[\033[36m\]`__git_ps1`\[\033[0m\] $ '
+
+formatted_branch() {
+	GIT_PS1_SHOWDIRTYSTATE=true
+	GIT_PS1_SHOWUNTRACKEDFILES=true
+	GIT_PS1_STATESEPARATOR=''
+	__git_ps1 | branch-strip.sh
+}
+
+export PS1='\[\033]0;`trimmed_dir`\007\]\[\033[33m\]`trimmed_dir`\[\033[36m\]`formatted_branch`\[\033[0m\] $ '
 
 man() {
     "$@" --help | maybe-page.sh
