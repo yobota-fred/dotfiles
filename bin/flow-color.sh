@@ -58,7 +58,8 @@ flow_color() {
     sed -Ee "s/(Merge(d|( branch|remote-tracking branch|pull request)) .*$)/$(printf $CYAN)\1$(printf $RESET)/" |
     sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) .?feature\/.*$)/$(printf $BRIGHT_CYAN)\1$(printf $RESET)/" |
     sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) .?hotfix\/.*$)/$(printf $RED)\1$(printf $RESET)/" |
-    sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) .?release\/.*$)/$(printf $YELLOW)\1$(printf $RESET)/"
+    sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) .?release\/.*$)/$(printf $YELLOW)\1$(printf $RESET)/" |
+    sed -Ee "s/(Merge tag .* into develop$)/$(printf $YELLOW)\1$(printf $RESET)/"
 }
 
 flow_color
