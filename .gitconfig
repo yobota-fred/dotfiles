@@ -19,6 +19,7 @@
     funbranch = branch -D
 	branches = "!f() { git branch $@ | awk -F ' +' '! /\\(no branch\\)/ {print $2}'; }; f"
 	rename = branch -m
+	get = fetch --all --tags
 	
 	### (un)committing
     amend = commit --amend --no-edit

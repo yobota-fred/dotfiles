@@ -73,5 +73,5 @@
 	{ "keys": ["ctrl+shift+j"], "command": "ace_jump_line" },
 
 	{ "keys": ["ctrl+n"], "command": "advanced_new_file" },
-	{ "keys": ["ctrl+shift+w"], "command": "close_all_files" },
+	{ "keys": ["ctrl+shift+w"], "command": "close_all" },
 ]

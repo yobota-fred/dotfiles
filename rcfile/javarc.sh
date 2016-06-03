@@ -11,6 +11,10 @@ function java_find() {
     ack --java -A 2 --smart-case --pager="maybe-page.sh" "$@" **/java
 }
 
+function bump() {
+	mvn versions:set -DnewVersion="$1" -DgenerateBackupPoms=false
+}
+
 alias ?=java_find
 
 # alias board="ack_ticket \"BOARD\""
