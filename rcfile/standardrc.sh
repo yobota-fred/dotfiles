@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /etc/profile
+# . /etc/profile
 
 PROJECTS=$GIT_BASEDIR
 # PROJECT_TYPE=
@@ -25,6 +25,6 @@ case "$PROJECT_TYPE" in
 		. "$THIS_DIR/javarc.sh" ;;
 esac
 
-cd "$PHOME"
+# cd "$PHOME"
 
 alias rebash=". ${BASH_SOURCE[0]}"

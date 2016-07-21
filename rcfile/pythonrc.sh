@@ -3,10 +3,32 @@ if [ -n "$RC_DEBUG" ]; then
 	echo "Running ${BASH_SOURCE[0]} from `pwd`"
 fi
 
-export VENV="$HOME/virtualenvs/$PROJECT"
+# export VIRTUAL_ENV="$WORKON_HOME/$PROJECT_NAME" # still needed on Windows?
 
-__venv_ps1='\[\033[35m\]`basename "$VIRTUAL_ENV"`\[\033[0m\]:'$PS1
-. "$VENV/Scripts/activate"
+window_title () {
+	if [ -z "$VIRTUAL_ENV" ]; then
+		trimmed_dir
+	else
+		echo "`trimmed_dir` (virtualenv `basename $VIRTUAL_ENV`)"
+	fi
+}
+
+coloured_dir() {
+	if [ -z "$VIRTUAL_ENV" ]; then
+		__bash_coloured_dir
+	else
+		__bash_coloured_dir | sed "s:`basename $VIRTUAL_ENV`:`printf \"\\033[1m\`basename $VIRTUAL_ENV\`\\033[22m\"`:"
+	fi
+}
+
+__venv_ps1=$PS1
+
+if [ -f "$VIRTUAL_ENV/Scripts/activate" ]; then # on Windows + Git bash
+	. "$VIRTUAL_ENV/Scripts/activate"
+# elif [ -f "$VIRTUAL_ENV/bin/activate" ]; then # on Linux
+# 	. "$VIRTUAL_ENV/bin/activate"
+fi
+
 export PS1=$__venv_ps1
 unset __venv_ps1
 

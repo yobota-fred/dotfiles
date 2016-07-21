@@ -7,6 +7,22 @@ trimmed_dir() {
 	echo $PWD | sed "s:^${GIT_BASEDIR}:£:" | sed "s:^${HOME}:~:"
 }
 
+__bash_coloured_dir() {
+	if [ -z "$PROJECT_NAME" ]; then
+		trimmed_dir
+	else
+		trimmed_dir | sed "s:${PROJECT_NAME}:`printf \"\\033[32m${PROJECT_NAME}\\033[33m\"`:"
+	fi	
+}
+
+window_title() {
+	trimmed_dir
+}
+
+coloured_dir() {
+	__bash_coloured_dir
+}
+
 formatted_branch() {
 	GIT_PS1_SHOWDIRTYSTATE=true
 	GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -14,7 +30,7 @@ formatted_branch() {
 	__git_ps1 | branch-strip.sh
 }
 
-export PS1='\[\033]0;`trimmed_dir`\007\]\[\033[33m\]`trimmed_dir`\[\033[36m\]`formatted_branch`\[\033[0m\] $ '
+export PS1='\[\033]0;`window_title`\007\]\[\033[33m\]`coloured_dir`\[\033[36m\]`formatted_branch`\[\033[0m\] $ '
 
 man() {
     "$@" --help | maybe-page.sh
