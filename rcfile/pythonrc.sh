@@ -17,7 +17,9 @@ coloured_dir() {
 	if [ -z "$VIRTUAL_ENV" ]; then
 		__bash_coloured_dir
 	else
-		__bash_coloured_dir | sed "s:`basename $VIRTUAL_ENV`:`printf \"\\033[1m\`basename $VIRTUAL_ENV\`\\033[22m\"`:"
+		venv=`basename $VIRTUAL_ENV`
+		replacement=`echo -e "\001\033[1m\002$venv\001\033[22m\002"`
+		__bash_coloured_dir | sed "s:$venv:$replacement:"
 	fi
 }
 

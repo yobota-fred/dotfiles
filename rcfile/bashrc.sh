@@ -11,7 +11,8 @@ __bash_coloured_dir() {
 	if [ -z "$PROJECT_NAME" ]; then
 		trimmed_dir
 	else
-		trimmed_dir | sed "s:${PROJECT_NAME}:`printf \"\\033[32m${PROJECT_NAME}\\033[33m\"`:"
+		replacement=`echo -e "\001\033[32m\002${PROJECT_NAME}\001\033[33m\002"`
+		trimmed_dir | sed "s:${PROJECT_NAME}:$replacement:"
 	fi	
 }
 
