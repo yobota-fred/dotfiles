@@ -3,7 +3,7 @@
 	email = fredcollman@gmail.com
 [core]
 	editor = vim
-	autocrlf = true
+	autocrlf = input
 	excludesfile = ~/.gitignore
 [alias]
 	### info & shortcuts
