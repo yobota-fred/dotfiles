@@ -3,8 +3,8 @@
 set -e
 
 hotfix_done() {
-    MASTER_BRANCH="master"
-    DEV_BRANCH="develop"
+    MASTER_BRANCH=`git config --get gitflow.branch.master`
+    DEV_BRANCH=`git config --get gitflow.branch.develop`
     HF_BRANCH="hotfix/$1"
 
     git checkout $MASTER_BRANCH && \

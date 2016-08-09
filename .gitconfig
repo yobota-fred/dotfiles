@@ -52,8 +52,8 @@
 	compete = shortlog -s -n
 
 	### git flow
-	dev = checkout develop
-	master = checkout master
+	dev = "!f() { git checkout `git config --get gitflow.branch.develop`; }; f"
+	master = "!f() { git checkout `git config --get gitflow.branch.master` }; f"
 	sf = flow feature start
 	fd = flow feature finish
 	hf = flow hotfix start
