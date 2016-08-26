@@ -59,6 +59,7 @@
 	hf = flow hotfix start
 	hd = !hotfix-done.sh
 	hotfix = "!f() { git hf "$@" || git hd "$@"; }; f"
+	resume = "!f() { git checkout "feature/$1"; }; f"
 
 	### typos & abbreviations
 	stauts = status
