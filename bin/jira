@@ -1,1 +1,17 @@
-git rev-parse --abbrev-ref HEAD | sed 's/[^A-Z]*\([A-Z]\+-[0-9]\+\).*/\1/' | awk -v stem=$JIRA_URL '{ print stem "/browse/" $1 }' | xargs nohup sensible-browser > /dev/null 2>&1 &
+ticket_number() {
+	git rev-parse --abbrev-ref HEAD | sed 's/[^A-Z]*\([A-Z]\+-[0-9]\+\).*/\1/'
+}
+
+if [ -z "$JIRA_URL" ]; then
+	echo "Must set JIRA_URL"
+	exit 1
+fi
+
+if [ $# -gt 0 ]; then
+	ticket=$1
+else
+	ticket=`ticket_number`
+fi
+
+echo "$JIRA_URL/browse/$1"
+nohup sensible-browser "$JIRA_URL/browse/$1" > /dev/null 2>&1 &
