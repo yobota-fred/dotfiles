@@ -50,6 +50,10 @@ function python_find() {
 	ack --python -A 2 --smart-case --pager="maybe-page.sh" "$@"
 }
 
+function keepdoing() {
+	watchmedo shell-command --patterns="*.py;*.sh;*file" --ignore-directories --recursive --drop --command="$1"
+}
+
 alias at=run_acceptance_tests
 alias ut=run_unit_tests
 alias ds=run_dev_server
