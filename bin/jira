@@ -1,0 +1,1 @@
+git rev-parse --abbrev-ref HEAD | sed 's/[^A-Z]*\([A-Z]\+-[0-9]\+\).*/\1/' | awk -v stem=$JIRA_URL '{ print stem "/browse/" $1 }' | xargs nohup sensible-browser > /dev/null 2>&1 &
