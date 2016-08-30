@@ -13,5 +13,5 @@ else
 	ticket=`ticket_number`
 fi
 
-echo "$JIRA_URL/browse/$1"
-nohup sensible-browser "$JIRA_URL/browse/$1" > /dev/null 2>&1 &
+echo "$JIRA_URL/browse/$ticket"
+nohup sensible-browser "$JIRA_URL/browse/$ticket" > /dev/null 2>&1 &
