@@ -33,8 +33,12 @@ formatted_branch() {
 
 export PS1='\[\033]0;`window_title`\007\]\[\033[33m\]`coloured_dir`\[\033[36m\]`formatted_branch`\[\033[0m\] $ '
 
+helpme() {
+	eval "$@ --help" | maybe-page.sh
+}
+
 man() {
-    "$@" --help | maybe-page.sh
+    command man "$@" 2>/dev/null || helpme $@
 }
 
 £() {
@@ -49,11 +53,30 @@ up() {
 	cd $dst
 }
 
-alias h="cd $PHOME"
+deploy() {
+	if [[ $# -eq 1 ]]; then
+		git push "$1" HEAD:master
+	else
+		echo "ERROR: Must specify remote app to deploy to" >&2
+	fi
+}
+
 alias x=exit
+alias clip="xclip -selection c"
 
 alias g=git
 alias "g+"="git add --all && git staged"
 alias "g-"="git reset HEAD --"
 alias s="git status"
 alias l="git l"
+
+alias h=heroku
+alias hl="heroku local:run"
+alias hr="heroku run"
+alias hlt="heroku local test"
+alias hld="heroku local document"
+alias hlw="heroku local web"
+alias hlb="heroku local:run bash"
+alias hrb="heroku run bash"
+alias hp="heroku local:run */manage.py shell"
+alias hlm="heroku local:run */manage.py"

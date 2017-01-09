@@ -74,4 +74,8 @@
 
 	{ "keys": ["ctrl+n"], "command": "advanced_new_file" },
 	{ "keys": ["ctrl+shift+w"], "command": "close_all" },
+
+	{ "keys": ["ctrl+shift+keypad4"], "command": "move_text_left" },
+	{ "keys": ["ctrl+shift+keypad6"], "command": "move_text_right" },
+
 ]
