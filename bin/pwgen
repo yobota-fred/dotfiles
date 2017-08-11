@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import string
+import random
+
+
+CHARS = string.ascii_lowercase + string.ascii_uppercase + string.digits
+
+def random_password(length):
+    return ''.join(random.SystemRandom().choice(CHARS) for i in range(length))
+
+if __name__ == "__main__":
+    print(random_password(50))

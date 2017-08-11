@@ -19,7 +19,10 @@
     funbranch = branch -D
 	branches = "!f() { git branch $@ | awk -F ' +' '! /\\(no branch\\)/ {print $2}'; }; f"
 	rename = branch -m
-	get = fetch --all --tags
+	get = fetch --all --tags --prune
+	pr = push --set-upstream origin HEAD
+	tidy = remote prune origin
+    track = "!read-only-remote.sh"
 	
 	### (un)committing
     amend = commit --amend --no-edit

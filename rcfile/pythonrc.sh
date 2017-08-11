@@ -50,8 +50,12 @@ function python_find() {
 	ack --python -A 2 --smart-case --pager="maybe-page.sh" "$@"
 }
 
+function general_find() {
+	ack --python --js --html --shell --sass -A 2 --smart-case --pager="maybe-page.sh" "$@"
+}
+
 function keepdoing() {
-	watchmedo shell-command --patterns="*.py;*.sh;*file" --ignore-directories --recursive --drop --command="$1"
+	watchmedo shell-command --patterns="*.py;*.sh;*.js;*.jsx;*file" --ignore-directories --recursive --drop --command="$1"
 }
 
 alias at=run_acceptance_tests

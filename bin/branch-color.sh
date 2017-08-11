@@ -1,4 +1,5 @@
 #!/bin/sh
+#!/bin/sh
 set -e
 
 DULL=0
@@ -53,13 +54,17 @@ BRIGHT_VIOLET="$ESC[${BRIGHT};${FG_VIOLET}m"
 BRIGHT_CYAN="$ESC[${BRIGHT};${FG_CYAN}m"
 BRIGHT_WHITE="$ESC[${BRIGHT};${FG_WHITE}m"
 
-flow_color() {
-    cat |
-    sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) .*$)/$(printf $CYAN)\1$(printf $RESET)/" |
-    sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) (.+\/|.?)feature\/.*$)/$(printf $BRIGHT_CYAN)\1$(printf $RESET)/" |
-    sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) (.+\/|.?)hotfix\/.*$)/$(printf $RED)\1$(printf $RESET)/" |
-    sed -Ee "s/(Merge(d| (branch|remote-tracking branch|pull request)) (.+\/|.?)release\/.*$)/$(printf $YELLOW)\1$(printf $RESET)/" |
-    sed -Ee "s/(Merge (tag .*|branch 'master') into (develop|ci)([^A-Za-z\\-].*)$)/$(printf $YELLOW)\1$(printf $RESET)/"
+branch_color() {
+    # sed -Ee "s|(origin/feature/[-_A-Za-z0-9]+)|$(printf $CYAN)\1$(printf $RESET)|g" |
+    # sed -Ee "s|([^/])(feature/[-_A-Za-z0-9]+)|\1$(printf $BRIGHT_CYAN)\2$(printf $RESET)|g" |
+    # sed -Ee "s|(origin/[-_A-Za-z0-9]+)|$(printf $RED)\1$(printf $RESET)|g" |
+    # sed -Ee "s|([^-_A-Za-z0-9/])(ci\|develop)|\1$(printf $BRIGHT_WHITE)\2$(printf $RESET)|g" |
+    # sed -Ee "s|(origin/(ci\|develop))|$(printf $BRIGHT_RED)\1$(printf $RESET)|g" |
+    sed -Ee "s|(\(.*)(origin/[-_A-Za-z0-9/]+)(.*\))|\1$(printf $RED)\2$(printf $RESET)\3|g" |
+    sed -Ee "s|(\(.*)(origin/(master\|ci\|develop))(.*\))|\1$(printf $BRIGHT_RED)\2$(printf $RESET)\4|g" |
+    sed -Ee "s|(\(.*[^-_A-Za-z0-9/])(ci\|develop)(.*\))|\1$(printf $BRIGHT_WHITE)\2$(printf $RESET)\3|g" |
+    sed -Ee "s|(heroku/[-_A-Za-z0-9]+)/master|$(printf $BRIGHT_VIOLET)\1$(printf $RESET)|g" |
+    sed -Ee "s|(HEAD)|$(printf $BRIGHT_WHITE)\1$(printf $RESET)|g"
 }
 
-flow_color
+branch_color

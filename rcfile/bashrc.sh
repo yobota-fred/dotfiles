@@ -67,7 +67,7 @@ alias clip="xclip -selection c"
 alias g=git
 alias "g+"="git add --all && git staged"
 alias "g-"="git reset HEAD --"
-alias s="git status"
+alias s="git status || ls"
 alias l="git l"
 
 alias h=heroku
