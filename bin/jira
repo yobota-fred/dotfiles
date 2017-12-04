@@ -1,7 +1,3 @@
-ticket_number() {
-	git rev-parse --abbrev-ref HEAD | sed 's/[^A-Z]*\([A-Z]\+-[0-9]\+\).*/\1/'
-}
-
 if [ -z "$JIRA_URL" ]; then
 	echo "Must set JIRA_URL"
 	exit 1
