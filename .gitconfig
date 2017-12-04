@@ -20,7 +20,9 @@
 	branches = "!f() { git branch $@ | awk -F ' +' '! /\\(no branch\\)/ {print $2}'; }; f"
 	rename = branch -m
 	get = fetch --all --tags --prune
-	pr = push --set-upstream origin HEAD
+    ; no longer available: clashes with hub-pr
+	; pr = push --set-upstream origin HEAD
+	p = push --set-upstream origin HEAD
 	tidy = remote prune origin
     track = "!read-only-remote.sh"
 	
@@ -102,3 +104,5 @@
 	insteadOf = hub:
 [include]
 	path = ~/.gitconfig.local
+[hub]
+	protocol = https
