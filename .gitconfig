@@ -19,7 +19,12 @@
     funbranch = branch -D
 	branches = "!f() { git branch $@ | awk -F ' +' '! /\\(no branch\\)/ {print $2}'; }; f"
 	rename = branch -m
-	get = fetch --all --tags
+	get = fetch --all --tags --prune
+    ; no longer available: clashes with hub-pr
+	; pr = push --set-upstream origin HEAD
+	p = push --set-upstream origin HEAD
+	tidy = remote prune origin
+    track = "!read-only-remote.sh"
 	
 	### (un)committing
     amend = commit --amend --no-edit
@@ -28,10 +33,12 @@
 	wip = !git add -A && git commit -m 'WIP'
 	unwip = reset --soft HEAD^
 	stashup = "!oldb=`git current`; newb=\"$oldb-stash\"; git checkout -b $newb && git add -A && git commit -qm \"unwanted commit\" && git checkout $oldb"
+	stashpop = "!oldb=`git current`; git reset \"$oldb-stash\"; git unwip; git unstage .;"
 	abandon = reset --hard @{upstream}
 	pushall = push origin :
     imerge = "!f() { git merge "$@"; git mergetool --no-prompt; }; f"
     tmpstash = stash --keep-index --include-untracked
+    rename = "!f() { git branch -m feature/$1 feature/$2; }; f"
 
     ### diffing
     di = "!f() { default-diff.sh "$@" | ignore-imports.sh | maybe-page.sh; }; f"
@@ -56,7 +63,7 @@
 
 	### git flow
 	dev = "!f() { git checkout `git config --get gitflow.branch.develop`; }; f"
-	master = "!f() { git checkout `git config --get gitflow.branch.master` }; f"
+	master = "!f() { git checkout `git config --get gitflow.branch.master`; }; f"
 	sf = flow feature start
 	fd = flow feature finish
 	hf = flow hotfix start
@@ -100,3 +107,5 @@
 	insteadOf = hub:
 [include]
 	path = ~/.gitconfig.local
+[hub]
+	protocol = https
