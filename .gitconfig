@@ -57,6 +57,7 @@
 	timeline = "!f() { git nicelog --first-parent $@; }; f"
 	# ITS_BOARD = "!f() { ticket=$1 && shift && git find "ITS_BOARD-$ticket" "$@"; }; f"
 	compete = shortlog -s -n
+  releases =  "!f() { git tag --format '%(refname:short) (at %(creatordate:iso))' -l [0-9]*.[0-9]*.[0-9]* | sort --version-sort --reverse; }; f"
 
 	### git flow
 	dev = "!f() { git checkout `git config --get gitflow.branch.develop`; }; f"
@@ -94,6 +95,7 @@
     keepBackup = false
 [merge]
     tool = kdiff3
+	ff = false
 [push]
 	default = simple
 [url "https://github"]
