@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+[ -e "requirements.txt" ] && pip install -r requirements.txt
+[ -e "package.json" ] && yarn install

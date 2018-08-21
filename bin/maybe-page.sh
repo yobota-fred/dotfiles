@@ -7,7 +7,7 @@ maybe_page() {
         cat
     else
         # Page only if needed.
-        less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines -x4
+        clear && less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines -x4
     fi
 }
 

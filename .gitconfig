@@ -43,7 +43,7 @@
     ### diffing
     di = "!f() { default-diff.sh "$@" | ignore-imports.sh | maybe-page.sh; }; f"
     idiff = difftool --dir-diff
-    staged = "!f() { git di --staged "$@"; }; f"
+    staged = "!f() { clear && git di --staged "$@"; }; f"
     istaged = difftool --dir-diff --staged
     pending = difftool --dir-diff --staged
     last = "!f() { git di HEAD^ "$@"; }; f"
@@ -56,8 +56,11 @@
 	id = "!f() { git log -n 1 "$@"; }; f"
 	timeline = "!f() { git nicelog --first-parent $@; }; f"
 	# ITS_BOARD = "!f() { ticket=$1 && shift && git find "ITS_BOARD-$ticket" "$@"; }; f"
-	compete = shortlog -s -n
   releases =  "!f() { git tag --format '%(refname:short) (at %(creatordate:iso))' -l [0-9]*.[0-9]*.[0-9]* | sort --version-sort --reverse; }; f"
+
+  # stats
+	compete = shortlog -s -n
+  cloc = "!f() { git ls-files -z | xargs -0 cloc }; f"
 
 	### git flow
 	dev = "!f() { git checkout `git config --get gitflow.branch.develop`; }; f"
