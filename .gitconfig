@@ -61,7 +61,6 @@
   # stats
 	compete = shortlog -s -n
   cloc = "!f() { git ls-files -z | xargs -0 cloc }; f"
-  mktags = "!.git/hooks/ctags"
 
 	### git flow
 	dev = "!f() { git checkout `git config --get gitflow.branch.develop`; }; f"
