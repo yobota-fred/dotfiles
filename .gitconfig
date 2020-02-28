@@ -60,7 +60,7 @@
 
   # stats
 	compete = shortlog -s -n
-  cloc = "!f() { git ls-files -z | xargs -0 cloc }; f"
+  cloc = "!f() { git ls-files -z | xargs -0 cloc; }; f"
 
 	### git flow
 	dev = "!f() { git checkout `git config --get gitflow.branch.develop`; }; f"
